@@ -1,5 +1,6 @@
 package tech.tucano.madlevel2example
 
+import android.view.LayoutInflater
 import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup

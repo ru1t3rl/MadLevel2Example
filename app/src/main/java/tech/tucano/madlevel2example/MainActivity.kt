@@ -5,6 +5,8 @@ import android.os.Bundle
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_main.*
 import tech.tucano.madlevel2example.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -16,7 +18,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
 
         initViews()
     }
@@ -31,5 +33,15 @@ class MainActivity : AppCompatActivity() {
         binding.rvReminders.adapter = reminderAdapter
 
         binding.rvReminders.addItemDecoration(DividerItemDecoration(this@MainActivity, DividerItemDecoration.VERTICAL))
+    }
+
+    private fun addReminder(reminder: String){
+        if(reminder.isNotBlank()){
+            reminders.add(Reminder(reminder))
+            reminderAdapter.notifyDataSetChanged()
+            binding.etReminder.text?.clear()
+        } else {
+            Snackbar.make(etReminder, "You must fill in the input field!", Snackbar.LENGTH_SHORT).show()
+        }
     }
 }
